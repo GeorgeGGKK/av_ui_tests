@@ -15,18 +15,22 @@ public class MainPage {
     private static final ElementsCollection cityList = $$x("//div[@class='popup__container']//div[@class='button_content']");
     private static final SelenideElement saleButton = $x("//div[@class='header-main-bottom_right']//div[2]");
     private static final SelenideElement mainCity = $x("//div[@class='header-main-city_text']");
+    private static final SelenideElement loginButton = $x("//div[contains(@class,'profile')]");
+    private static final SelenideElement searchInput = $x("//input[@placeholder='Поиск']");
+
     @Step("Выбираем город и переходим на страницу Акций")
-    public SalePage choiceCityAndTransferSalePage(){
+    public SalePage choiceCityAndTransferSalePage() {
         cityList.first().click();
         saleButton.click();
         return new SalePage();
     }
+
     @Step("Проверка корректного URL")
-     public void checkCurrentURL(String url){
-         Assertions.assertEquals(url(),url);
+    public void checkCurrentURL(String url) {
+        Assertions.assertEquals(url(), url);
     }
 
-    public void checkCity(String city){
+    public void checkCity(String city) {
         step("Выбираем город из параметров", () -> {
             cityList.filter(text(city)).first().click();
         });
@@ -35,5 +39,18 @@ public class MainPage {
         });
     }
 
+    @Step("Переход на страницу входа")
+    public LoginPage transferLoginPage() {
+        cityList.first().click();
+        loginButton.click();
+        return new LoginPage();
+    }
+
+    @Step("Поиск товара в поисковой строке")
+    public CatalogPage searchItem(String item) {
+        cityList.first().click();
+        searchInput.setValue(item).pressEnter();
+        return new CatalogPage();
+    }
 
 }
