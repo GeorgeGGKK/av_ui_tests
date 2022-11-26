@@ -1,6 +1,7 @@
 package ru.av.tests;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -8,12 +9,17 @@ import org.junit.jupiter.params.provider.ValueSource;
 import ru.av.data.TestData;
 import ru.av.pages.MainPage;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$$x;
-import static com.codeborne.selenide.Selenide.$x;
-import static io.qameta.allure.Allure.step;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
-@DisplayName("Тесты на сайт Азбука Вкуса ")
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@DisplayName("Тесты на сайт Азбуки Вкуса ")
 public class AvTests extends TestBase {
     TestData testData = new TestData();
     MainPage mainPage = new MainPage();
@@ -64,6 +70,5 @@ public class AvTests extends TestBase {
                 .searchItem(testData.getProduct())
                 .checkProducts(testData.getProduct());
     }
-
 
 }

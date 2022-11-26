@@ -26,7 +26,7 @@ public class CatalogPage {
     private static final SelenideElement menuCartButton = $x("//div[contains(text(),'Корзина')]");
     private static final SelenideElement cartButton = $x("//div[contains(text(),'В корзину')]");
     private static final SelenideElement productInfo = $x("//div[@data-digi-prod-position='1']//div[@class='product-info']");
-    private final ElementsCollection productList = $$x("//div[@class='catalog-products_list']//div[@class='product-info_name']//a");
+    ElementsCollection productList = $$x("//a[@class='text product-info_name-container text--type-text text--font-inherit']");
 
     @Step("Нажимаем на кнопку добавления товара в корзину")
     public CatalogPage addItem(String item) {
@@ -55,11 +55,13 @@ public class CatalogPage {
     }
 
     @Step("Проверка найденного товара")
-    public void checkProducts(String item) {
-        List<String> products = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            products.add(productList.get(i).getAttribute("title"));
-            assertTrue(products.get(i).contains(item));
+    public void checkProducts(String item){
+        List<String> prod = new ArrayList<>();
+        productList.first().shouldHave(text(item));
+        productList.forEach(x -> prod.add(x.getText()));
+        for (int i = 0; i < prod.size(); i++) {
+            assertTrue(prod.get(i).contains(item));
         }
+        System.out.println(prod);
     }
 }
