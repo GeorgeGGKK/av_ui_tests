@@ -3,6 +3,7 @@ package ru.av.tests;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -24,7 +25,7 @@ public class AvTests extends TestBase {
     TestData testData = new TestData();
     MainPage mainPage = new MainPage();
 
-
+    @Tag("AV_UI")
     @DisplayName("Проверка выбора текущего местоположения.")
     @ParameterizedTest(name = "Город - {0}.")
     @ValueSource(strings = {"Москва", "Санкт-Петербург"})
@@ -32,7 +33,7 @@ public class AvTests extends TestBase {
         mainPage.checkCity(city);
     }
 
-
+    @Tag("AV_UI")
     @Test
     @DisplayName("Проверка ограничения контента по возрасту. Нажатие на кнопку - Нет.")
     public void сheckContentAgeRestriction() {
@@ -42,6 +43,7 @@ public class AvTests extends TestBase {
                 .checkCurrentURL(testData.getBaseURL());
     }
 
+    @Tag("AV_UI")
     @Test
     @DisplayName("Проверка валидационных сообщений на странице входа")
     public void checkValidationMessages() {
@@ -51,6 +53,7 @@ public class AvTests extends TestBase {
                 .checkMassage(testData.getError_01(), testData.getError_02());
     }
 
+    @Tag("AV_UI")
     @Test
     @DisplayName("Проверка добавления товара в корзину")
     public void checkItemAddingToCart() {
@@ -63,6 +66,7 @@ public class AvTests extends TestBase {
 
     }
 
+    @Tag("AV_UI")
     @Test
     @DisplayName("Проверка поиска товара в каталоге")
     public void searchProductsInCatalog() {

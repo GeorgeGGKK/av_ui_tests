@@ -1,0 +1,16 @@
+{
+  "base": {
+    "project": "${JOB_BASE_NAME}",
+    "environment": "qa.guru",
+    "comment": "notification in telegram bot",
+    "reportLink": "${BUILD_URL}",
+    "language": "ru",
+    "allureFolder": "allure-report/",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "5589604236:AAHJ-KGlN8xKzxrj-Hq4XApZhlV059O1QRc",
+    "chat": "-1001733756216",
+    "replyTo": ""
+  }
+}
